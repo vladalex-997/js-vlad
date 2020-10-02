@@ -30,5 +30,6 @@
   "launch": {
     "configurations": [],
     "compounds": []
-  }
+  },
+  "editor.detectIndentation": false
 }
