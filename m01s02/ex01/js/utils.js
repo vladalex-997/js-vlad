@@ -8,4 +8,4 @@ console.warn(
   'Din fisierul utils.js afiseaza in consola suprafata unui cerc cu diametrul de 15 (foloseste obiectul Math)',
 );
 
-console.log((Math.pow(15 / 2, 2) * Math.pi).toString());
+console.log((Math.pow(15 / 2, 2) * Math.PI).toString());

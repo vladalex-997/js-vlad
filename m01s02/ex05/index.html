@@ -17,10 +17,22 @@
   <script src="https://tab.pixellab.ro/pixeltab-top.js"></script>
 </head>
 
-<body>
+<body onload="console.log(prompt('Bine ai venit, cum te cheama?'));">
 
 
 
+  <script src="singurulfisier.js"></script>
+
+  <h1 onclick="alert(`Gigel`)">Hello from the other side</h1>
+
+  <button onclick="console.log('Am fost apasat')">Apasama Consola</button>
+
+  <button onclick="alert('Butonul a fost apasat')">Apasama Alerta</button>
+
+  <button
+    onmouseover="console.log(`Ai vrea sa apesi acest buton?`)"
+    onclick="console.log(prompt(`Care este numele tau?`))"
+  >Buton Smecher</button>
 
   <div
     class="pixeltab-host"
