@@ -3,7 +3,7 @@ var person = {
   surname: 'Iordache',
   age: 35,
   petOwner: false,
-  skils: [
+  skills: [
     'html',
     'javascript',
     'css',
