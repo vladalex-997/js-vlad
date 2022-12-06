@@ -1,7 +1,7 @@
 var person = {
-  name: 'Gigel',
-  surname: 'Marcel',
-  age: 15,
+  name: 'Dragos',
+  surname: 'Iordache',
+  age: 35,
   petOwner: false,
   skills: ['html', 'javascript', 'css'],
   friends: [
@@ -23,10 +23,10 @@ var person = {
   ],
 };
 
-console.warn(
-  'Afiseaza propozitia: “Ma numesc xxx yyy si stiu html si css.” Foloseste notatia cu paranteze patrate',
-);
-
+console.warn(`
+  Afiseaza propozitia: “Ma numesc xxx yyy si stiu html si css.”
+  Foloseste notatia cu paranteze patrate
+`);
 console.log(
   'Ma numesc ' +
     person.name +
@@ -39,17 +39,17 @@ console.log(
     '.',
 );
 
-console.warn(`Afiseaza propozitia “Sunt xxx si acum invat JavaScript.
-” Nu folosi valoarea din arrayul de skills.
+console.warn(`
+  Afiseaza propozitia “Sunt xxx si acum invat JavaScript.”
+  Nu folosi valoarea din arrayul de skills.
 `);
-
 console.log('Sunt ' + person.name + ' si acum invat JavaScript.');
 
-console.warn(
-  `Afiseaza propozitia “Am x prieteni: Larry, Steven si Carol.”
-   Foloseste proprietatea length si apeleaza direct proprietatile name ale obiectelor.`,
-);
-
+console.warn(`
+  Afiseaza propozitia “Am x prieteni: Larry, Steven si Carol.”
+  Foloseste proprietatea length si apeleaza direct proprietatile
+  name ale obiectelor.
+`);
 console.log(
   'Am ' +
     person.friends.length +

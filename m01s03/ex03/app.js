@@ -36,8 +36,9 @@ larry.friends.person = person;
 steven.friends.person = person;
 andra.friends.person = person;
 
-steven.friends.larry = larry;
+// Seteaza-l pe Steven ca prieten al lui Larry si al Andrei (si invers).
 larry.friends.steven = steven;
+steven.friends.larry = larry;
 
 steven.friends.andra = andra;
 andra.friends.steven = steven;
@@ -48,18 +49,20 @@ andra.friends.carol = carol;
 delete larry.friends.person;
 delete person.friends.larry;
 
-console.warn(`Afiseaza numele complet al lui Person folosind obiectul Larry.`);
-
+console.warn(`
+  Afiseaza numele complet al lui Person folosind obiectul Larry.
+`);
 console.log(
   larry.friends.steven.friends.person.name +
     ' ' +
     larry.friends.steven.friends.person.surname,
 );
 
-console.warn(`Folosind obiectul Carol afiseaza numele complet al lui Person.`);
-
+console.warn(`
+  Folosind obiectul Carol afiseaza numele complet al lui Person.
+`);
 console.log(
-  carol.friends.steven.friends.person.name +
+  carol.friends.andra.friends.person.name +
     ' ' +
-    carol.friends.steven.friends.person.surname,
+    carol.friends.andra.friends.person.surname,
 );
