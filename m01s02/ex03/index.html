@@ -14,18 +14,32 @@
   <title>Evenimente</title>
 </head>
 
-<body onload="console.log(prompt('Care este numele tau?'));">
+<body
+  onload="console.log(prompt('Care este numele tau?'));"
+  onload="alert('Bine ai venit pe acest site!')"
+>
 
   <button
-    onclick="alert('Bine ai venit la Pixellab!');"
-    title="fomrat"
+    onclick="alert('Bine ai venit la Pixellab');"
+    title="format"
   >Hello!</button>
 
   <button
-    onclick="alert('M-ai apasat');"
-    onmouseover="console.log('Apasa-ma!');"
+    onclick="alert('Bine ai apasat pe acest buton!');"
+    title="button3"
+  >Button3!</button>
+
+
+  <button
+    onclick=console.log(20+156);
+    title="button4"
+  >Button4!</button>
+
+  <button
     title="format"
-  >Apasa-ma!</button>
+    onclick="alert('M-ai apasat');"
+    onmouseover="console.log('Apasa-ma');"
+  >Apasama</button>
 </body>
 
 </html>
