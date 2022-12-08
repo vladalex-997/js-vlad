@@ -97,3 +97,16 @@ person.friends.forEach(function (friend) {
   message += `Intre ${person.name} si ${friend.name} este o diferenta de ${diff} ani. `;
 });
 console.log(message.trim());
+
+console.warn(`
+  Folosind metoda reverse si apoi forEach, afiseaza in
+  ordine inversa elementele arrayului skills.
+`);
+// slice clones
+// reverse mutates
+person.skills
+  .slice()
+  .reverse()
+  .forEach(function (skill) {
+    console.log(skill);
+  });
