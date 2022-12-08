@@ -92,7 +92,7 @@ console.warn(`
 `);
 var message = '';
 person.friends.forEach(function (friend) {
-  var diff = person.age - friend.age;
+  var diff = Math.abs(person.age - friend.age);
 
   message += `Intre ${person.name} si ${friend.name} este o diferenta de ${diff} ani. `;
 });
