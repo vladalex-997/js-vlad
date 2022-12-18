@@ -1,4 +1,4 @@
-var name = 'Dragos';
+var name = 'Gigel';
 
 console.log(`
     ${name} este instructor de programare. ${name} studiaza JavaScript de la 17 ani.
