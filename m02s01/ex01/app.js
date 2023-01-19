@@ -70,6 +70,16 @@ class Car {
   turnLightsOff() {
     this.areLightsOn = false;
   }
+
+  flashLights() {
+    this.turnLightsOn();
+    // v1 for preserving this:
+    const self = this;
+
+    setTimeout(function () {
+      self.turnLightsOff();
+    }, 5 * 1000);
+  }
 }
 
 const audi = new Car('Audi', 'black', 4, 50);
@@ -92,5 +102,7 @@ const opel = new Car('Opel', 'red', 4, 3);
  * Adauga o proprietate booleana numita areLightsOn si asigneaza-i valoarea false.
  * Adauga metode numite turnLightsOn() si turnLightsOff() care sa manipuleze valoarea.
  * Adauga o metoda numita flashLights() care sa apeleze cele doua
- * metode in succesiune, folosind metoda window.setTimeout().
+ * metode in succesiune, folosind metoda setTimeout().
  */
+
+const cars = [audi, opel];
