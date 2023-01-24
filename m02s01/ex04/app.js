@@ -80,6 +80,9 @@ class Car {
 
   render() {
     document.body.append(this.frame);
+
+    // method chaining
+    return this;
   }
 }
 
