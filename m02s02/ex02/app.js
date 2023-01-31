@@ -25,11 +25,48 @@ const $personForm = $('#personForm')
 
     $form.trigger('reset');
     $form.find('.skills-ul').remove();
+    $form.next().remove();
 
     $form.after(displayPerson(person));
   })
   .on('click', '.delete-skill-button', function () {
     $(this).parent().remove();
+  })
+  .on('click', '.edit-skill-button', function () {
+    const $editSkillButton = $(this);
+
+    $editSkillButton.siblings('.delete-skill-button').hide();
+    $editSkillButton.siblings('.skill-label').hide();
+    $editSkillButton.siblings('input[name^="skill-"]').prop('type', 'text');
+    $editSkillButton.siblings('.cancel-edit-skill-button').show();
+    $editSkillButton.siblings('.save-skill-button').show();
+    $editSkillButton.hide();
+  })
+  .on('click', '.cancel-edit-skill-button', function () {
+    const $cancelEditSkillButton = $(this).hide();
+
+    $cancelEditSkillButton.siblings('.delete-skill-button').show();
+    $cancelEditSkillButton.siblings('.edit-skill-button').show();
+    $cancelEditSkillButton
+      .siblings('input[name^="skill-"]')
+      .prop('type', 'hidden');
+    $cancelEditSkillButton.siblings('.skill-label').show();
+  })
+  .on('click', '.save-skill-button', function () {
+    const $saveSkillButton = $(this).hide();
+    const $skillInput = $saveSkillButton
+      .siblings('input[name^="skill-"]')
+      .prop('type', 'hidden');
+    const newSkill = $skillInput.val();
+    const skillParts = $skillInput.prop('name').split('-');
+    skillParts[1] = newSkill;
+
+    $skillInput.prop('name', skillParts.join('-'));
+
+    $saveSkillButton.siblings('.delete-skill-button').show();
+    $saveSkillButton.siblings('.edit-skill-button').show();
+    $saveSkillButton.siblings('.skill-label').show();
+    $saveSkillButton.siblings('.cancel-edit-skill-button').hide();
   });
 
 const $skillButton = $('#skill')
@@ -61,9 +98,14 @@ function renderSkillsUl(skill = '') {
     });
   }
 
-  const $skillLi = $('<li>', {
-    text: skill,
-  }).appendTo($skillsUl);
+  const $skillLi = $('<li>')
+    .appendTo($skillsUl)
+    .append(
+      $('<span>', {
+        text: skill,
+        class: 'skill-label',
+      }),
+    );
 
   $('<input>', {
     value: skill,
@@ -76,6 +118,28 @@ function renderSkillsUl(skill = '') {
     text: 'Delete',
     class: 'delete-skill-button',
   }).appendTo($skillLi);
+
+  $('<button>', {
+    type: 'button',
+    text: 'Edit',
+    class: 'edit-skill-button',
+  }).appendTo($skillLi);
+
+  $('<button>', {
+    type: 'button',
+    text: 'Cancel',
+    class: 'cancel-edit-skill-button',
+  })
+    .hide()
+    .appendTo($skillLi);
+
+  $('<button>', {
+    type: 'button',
+    text: 'Save',
+    class: 'save-skill-button',
+  })
+    .hide()
+    .appendTo($skillLi);
 
   return $skillsUl;
 }
