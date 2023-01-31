@@ -22,7 +22,10 @@ const $personForm = $('#personForm').on('submit', function (event) {
     skills,
   };
 
-  renderPerson(person);
+  $form.trigger('reset');
+  $form.find('.skills-ul').remove();
+
+  $form.after(displayPerson(person));
 });
 
 const $skillButton = $('#skill')
@@ -54,7 +57,7 @@ function renderSkillsUl(skill = '') {
     });
   }
 
-  $('<li>', {
+  const $skillLi = $('<li>', {
     text: skill,
   }).appendTo($skillsUl);
 
@@ -62,21 +65,101 @@ function renderSkillsUl(skill = '') {
     value: skill,
     name: `skill-${skill}`,
     type: 'hidden',
-  }).appendTo($skillsUl);
+  }).appendTo($skillLi);
 
   return $skillsUl;
 }
 
-function renderPerson(person) {
-  const $personDisplay = $('<div>');
-  const $personName = $('<h1>', {
-    text: `${person.name} ${person.surname}`,
-  });
-  $personDisplay.append($personName);
+// function renderPerson(person) {
+//   const $personDisplay = $('<div>');
+//   const $personName = $('<h1>', {
+//     text: `${person.name} ${person.surname}`,
+//   });
+//   $personDisplay.append($personName);
 
+//   $('<p>', {
+//     text: `Age: ${person.age}`,
+//   }).appendTo($personDisplay);
+
+//   $personForm.next().remove();
+//   $personForm.after($personDisplay);
+// }
+
+// function displayPersonSkills(person) {
+//   if (person.skills.length < 1) {
+//     return;
+//   }
+
+//   const $skillsContainer = $('<div>');
+
+//   $('<h2>', {
+//     text: 'Skills',
+//   }).appendTo($skillsContainer);
+
+//   const $skillsDisplay = $('<ul>').appendTo($skillsContainer);
+
+//   person.skills.forEach(function (skill) {
+//     $('<li>', {
+//       text: skill,
+//     }).appendTo($skillsDisplay);
+//   });
+
+//   $personForm.next().append($skillsContainer);
+// }
+
+function displayPerson(person) {
+  const $personDisplay = $('<div>');
+
+  $personDisplay
+    .append(displayPersonDetails(person))
+    .append(displayPersonSkills(person));
+
+  return $personDisplay;
+}
+
+function displayPersonDetails(person) {
+  // creeare div
+  const $personDetails = $('<div>');
+  // creeare h1 + append la div
+  $('<h1>', {
+    text: `${person.name} ${person.surname}`,
+  }).appendTo($personDetails);
+
+  // creeare p cu text varsta + append la div
   $('<p>', {
     text: `Age: ${person.age}`,
-  }).appendTo($personDisplay);
+  }).appendTo($personDetails);
 
-  $personForm.after($personDisplay);
+  // return div
+
+  return $personDetails;
+}
+
+function displayPersonSkills(person) {
+  const skills = person.skills;
+
+  if (skills.length < 1) {
+    return null;
+  }
+
+  // creeare div
+  const $container = $('<div>');
+
+  // creeare h2 + append
+  $('<h2>', {
+    text: 'Skills',
+  }).appendTo($container);
+
+  // creeare ul + append
+  const $ul = $('<ul>').appendTo($container);
+
+  // bucla cu liuri + append ul
+  skills.forEach(function (skill) {
+    $('<li>', {
+      text: skill,
+    }).appendTo($ul);
+  });
+
+  // return div
+  return $container;
 }
