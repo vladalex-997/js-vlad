@@ -1,32 +1,36 @@
-const $personForm = $('#personForm').on('submit', function (event) {
-  event.preventDefault();
-  // this -> elementul de DOM
-  const $form = $(this);
-  const $nameInput = $form.find('input[name="name"]');
-  const $surnameInput = $form.find('input[name="surname"]');
-  const $ageInput = $form.find('input[name="age"]');
-  const $skillInputs = $form.find('input[name^="skill-"]');
+const $personForm = $('#personForm')
+  .on('submit', function (event) {
+    event.preventDefault();
+    // this -> elementul de DOM
+    const $form = $(this);
+    const $nameInput = $form.find('input[name="name"]');
+    const $surnameInput = $form.find('input[name="surname"]');
+    const $ageInput = $form.find('input[name="age"]');
+    const $skillInputs = $form.find('input[name^="skill-"]');
 
-  const skills = [];
+    const skills = [];
 
-  $skillInputs.each(function () {
-    const $skilInput = $(this);
+    $skillInputs.each(function () {
+      const $skilInput = $(this);
 
-    skills.push($skilInput.val());
+      skills.push($skilInput.val());
+    });
+
+    const person = {
+      name: $nameInput.val(),
+      surname: $surnameInput.val(),
+      age: $ageInput.val(),
+      skills,
+    };
+
+    $form.trigger('reset');
+    $form.find('.skills-ul').remove();
+
+    $form.after(displayPerson(person));
+  })
+  .on('click', '.delete-skill-button', function () {
+    $(this).parent().remove();
   });
-
-  const person = {
-    name: $nameInput.val(),
-    surname: $surnameInput.val(),
-    age: $ageInput.val(),
-    skills,
-  };
-
-  $form.trigger('reset');
-  $form.find('.skills-ul').remove();
-
-  $form.after(displayPerson(person));
-});
 
 const $skillButton = $('#skill')
   .next()
@@ -65,6 +69,12 @@ function renderSkillsUl(skill = '') {
     value: skill,
     name: `skill-${skill}`,
     type: 'hidden',
+  }).appendTo($skillLi);
+
+  $('<button>', {
+    type: 'button',
+    text: 'Delete',
+    class: 'delete-skill-button',
   }).appendTo($skillLi);
 
   return $skillsUl;
