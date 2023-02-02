@@ -1,8 +1,13 @@
 class Car {
+  areHazardsOn = false;
+  areLightsOn = false;
+
   constructor(left = 0, top = 0, color = 'black') {
     this.left = left;
     this.top = top;
     this.color = color;
+
+    this.intervalId = -1;
 
     this.frame = document.createElement('div');
     this.frame.classList.add('frame');
@@ -56,10 +61,12 @@ class Car {
   turnLightsOn() {
     // this.lightFront.style.backgroundColor = 'yellow';
     this.lightFront.classList.add('light--on');
+    this.areLightsOn = true;
   }
 
   turnLightsOff() {
     this.lightFront.classList.remove('light--on');
+    this.areLightsOn = false;
   }
 
   changePosition(left = 0, top = 0) {
@@ -76,6 +83,26 @@ class Car {
     });
 
     return element;
+  }
+
+  toggleHazards() {
+    if (this.areHazardsOn === true) {
+      // stop hazards
+      clearInterval(this.intervalId);
+      this.areHazardsOn = false;
+    } else {
+      // v2 for "this"
+      this.intervalId = setInterval(() => {
+        if (this.areLightsOn === true) {
+          this.turnLightsOff();
+        } else {
+          this.turnLightsOn();
+        }
+      }, 800);
+      this.areHazardsOn = true;
+    }
+
+    return this;
   }
 
   render() {
