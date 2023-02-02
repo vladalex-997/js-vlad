@@ -68,7 +68,36 @@ const $personForm = $('#personForm')
     $saveSkillButton.siblings('.edit-skill-button').show();
     $saveSkillButton.siblings('.skill-label').text(newSkill).show();
     $saveSkillButton.siblings('.cancel-edit-skill-button').hide();
+  })
+  .on('click', '.create-pet-button', function () {
+    const $createPetButton = $(this);
+    const $inputs = $createPetButton.siblings('input[name]');
+    const pet = {};
+
+    $inputs.each(function () {
+      const $input = $(this);
+      const value = $input.val();
+      const key = $input.prop('name').split('-').pop();
+
+      pet[key] = value;
+    });
+
+    $createPetButton.after(renderPetUl(pet));
   });
+
+$('#has-pets').on('click', function () {
+  const $checkbox = $(this);
+  const $fieldset = $checkbox.next().next();
+  const checked = $checkbox.prop('checked') === true;
+
+  if (checked === true) {
+    // show
+    $fieldset.slideDown();
+  } else {
+    // hide
+    $fieldset.slideUp();
+  }
+});
 
 const $skillButton = $('#skill')
   .next()
@@ -143,6 +172,42 @@ function renderSkillsUl(skill = '') {
     .appendTo($skillLi);
 
   return $skillsUl;
+}
+
+function renderPetUl(pet = {}) {
+  const ulClass = 'pet-preview-ul';
+  let $ul = $(`.${ulClass}`);
+
+  let petString = '';
+  Object.keys(pet).forEach(function (keyName) {
+    const value = pet[keyName];
+    const punctuation = ', ';
+
+    petString += `${value}${punctuation}`;
+  });
+
+  if ($ul.length === 0) {
+    $ul = $('<ul>', {
+      class: ulClass,
+    });
+  }
+
+  const $li = $('<li>')
+    .append(
+      $('<span>', {
+        text: petString,
+      }),
+    )
+    .append(
+      $('input', {
+        type: 'text',
+        value: petString,
+      }),
+    );
+
+  $ul.append($li);
+
+  return $ul;
 }
 
 // function renderPerson(person) {
