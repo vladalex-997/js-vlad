@@ -42,7 +42,7 @@ const $personForm = $('#personForm')
     $editSkillButton.siblings('.save-skill-button').show();
     $editSkillButton.hide();
   })
-  .on('click', '.cancel-edit-skill-button', function () {
+  .on('click', '.cancel-edit-skill-button', function cancelEditSkill() {
     const $cancelEditSkillButton = $(this).hide();
 
     $cancelEditSkillButton.siblings('.delete-skill-button').show();
@@ -51,8 +51,9 @@ const $personForm = $('#personForm')
       .siblings('input[name^="skill-"]')
       .prop('type', 'hidden');
     $cancelEditSkillButton.siblings('.skill-label').show();
+    $cancelEditSkillButton.siblings('.save-skill-button').hide();
   })
-  .on('click', '.save-skill-button', function () {
+  .on('click', '.save-skill-button', function saveSkill() {
     const $saveSkillButton = $(this).hide();
     const $skillInput = $saveSkillButton
       .siblings('input[name^="skill-"]')
@@ -65,7 +66,7 @@ const $personForm = $('#personForm')
 
     $saveSkillButton.siblings('.delete-skill-button').show();
     $saveSkillButton.siblings('.edit-skill-button').show();
-    $saveSkillButton.siblings('.skill-label').show();
+    $saveSkillButton.siblings('.skill-label').text(newSkill).show();
     $saveSkillButton.siblings('.cancel-edit-skill-button').hide();
   });
 
