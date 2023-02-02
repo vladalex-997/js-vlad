@@ -179,9 +179,13 @@ function renderPetUl(pet = {}) {
   let $ul = $(`.${ulClass}`);
 
   let petString = '';
-  Object.keys(pet).forEach(function (keyName) {
+  Object.keys(pet).forEach(function (keyName, index, keys) {
     const value = pet[keyName];
-    const punctuation = ', ';
+    let punctuation = ', ';
+
+    if (keys.length - 1 === index) {
+      punctuation = '';
+    }
 
     petString += `${value}${punctuation}`;
   });
@@ -199,8 +203,8 @@ function renderPetUl(pet = {}) {
       }),
     )
     .append(
-      $('input', {
-        type: 'text',
+      $('<input>', {
+        type: 'hidden',
         value: petString,
       }),
     );
