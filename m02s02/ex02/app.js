@@ -7,24 +7,45 @@ const $personForm = $('#personForm')
     const $surnameInput = $form.find('input[name="surname"]');
     const $ageInput = $form.find('input[name="age"]');
     const $skillInputs = $form.find('input[name^="skill-"]');
+    const $petInputs = $form.find('input[name^="pet-"]');
 
     const skills = [];
-
     $skillInputs.each(function () {
       const $skilInput = $(this);
 
       skills.push($skilInput.val());
     });
 
+    const pets = [];
+    $petInputs.each(function () {
+      // name="pet-Twix, Papagal, 45"
+      const $input = $(this);
+      const name = $input.prop('name');
+      const petValue = name.split('-')[1];
+      const parts = petValue.split(', ');
+      const pet = {
+        name: parts[0],
+        species: parts[1],
+        age: parts[2],
+      };
+
+      pets.push(pet);
+    });
+
+    const friends = [];
+
     const person = {
       name: $nameInput.val(),
       surname: $surnameInput.val(),
       age: $ageInput.val(),
       skills,
+      pets,
     };
 
     $form.trigger('reset');
     $form.find('.skills-ul').remove();
+    $form.find('.pet-preview-ul').remove();
+    $form.find('.friend-preview-ul').remove();
     $form.next().remove();
 
     $form.after(displayPerson(person));
@@ -81,6 +102,8 @@ const $personForm = $('#personForm')
 
       pet[key] = value;
     });
+
+    $inputs.val('');
 
     $createPetButton.after(renderPetUl(pet));
   });
@@ -206,6 +229,7 @@ function renderPetUl(pet = {}) {
       $('<input>', {
         type: 'hidden',
         value: petString,
+        name: `pet-${petString}`,
       }),
     );
 
@@ -256,9 +280,22 @@ function displayPerson(person) {
 
   $personDisplay
     .append(displayPersonDetails(person))
-    .append(displayPersonSkills(person));
+    .append(displayPersonSkills(person))
+    .append(displayPet(person));
 
   return $personDisplay;
+}
+
+function displayPet(person) {
+  const $petDisplay = $('<div>');
+
+  person.pets.forEach(function (pet) {
+    $('<p>', {
+      text: `${pet.name}, ${pet.species}, ${pet.age}`,
+    }).appendTo($petDisplay);
+  });
+
+  return $petDisplay;
 }
 
 function displayPersonDetails(person) {
