@@ -1,7 +1,7 @@
 class Car {
   areHazardsOn = false;
   areLightsOn = false;
-
+  areBreaksOn = false;
   constructor(left = 0, top = 0, color = 'black') {
     this.left = left;
     this.top = top;
@@ -56,22 +56,60 @@ class Car {
     this.wheelCapFront = document.createElement('div');
     this.wheelCapFront.classList.add('wheel__cap');
     this.wheelFront.append(this.wheelCapFront);
+    return this;
   }
 
   turnLightsOn() {
     // this.lightFront.style.backgroundColor = 'yellow';
     this.lightFront.classList.add('light--on');
     this.areLightsOn = true;
+    return this;
   }
 
   turnLightsOff() {
     this.lightFront.classList.remove('light--on');
     this.areLightsOn = false;
+    return this;
+  }
+
+  engageBreak() {
+    this.lightBack.classList.add(`light--on`);
+    this.areBreaksOn = true;
+    return this;
+  }
+
+  disengageBreak() {
+    this.lightBack.classList.remove(`light--on`);
+    this.areBreaksOn = true;
+    return this;
+  }
+
+  changeTireColor(color) {
+    this.wheelBack.style.backgroundColor = color;
+    this.wheelFront.style.backgroundColor = color;
+    return this;
+  }
+
+  changeCapColor(color) {
+    this.wheelCapBack.style.backgroundColor = color;
+    this.wheelCapFront.style.backgroundColor = color;
+    return this;
+  }
+
+  changeBodyColor(color) {
+    this.carBody.style.backgroundColor = color;
+    return this;
+  }
+
+  changeRoofColor(color) {
+    this.carTop.style.backgroundColor = color;
+    return this;
   }
 
   changePosition(left = 0, top = 0) {
     this.frame.style.left = `${left}px`;
     this.frame.style.top = `${top}px`;
+    return this;
   }
 
   createElement(nodeName = '', classListArray = []) {
@@ -115,3 +153,4 @@ class Car {
 
 const car = new Car(0, 250, 'red');
 car.render();
+car.changeRoofColor(`yellow`);
