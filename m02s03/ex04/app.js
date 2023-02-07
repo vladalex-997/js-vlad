@@ -1,5 +1,7 @@
 const image = document.querySelector('.image');
 
+console.log(image.complete);
+
 const log = (message = '', cssClass = 'log') => {
   let p = document.querySelector(`.${cssClass}`);
 
@@ -14,8 +16,12 @@ const log = (message = '', cssClass = 'log') => {
 
 log('Imaginea se incarca...');
 
-image.addEventListener('load', () => {
-  log('Imaginea s-a incarcat');
-});
+// log('Imaginea s-a incarcat');
+// image.addEventListener('load', () => {
+//   log('Imaginea s-a incarcat');
+// });
 
 // history DOM level 0
+image.onload = () => {
+  log('Imaginea s-a incarcat');
+};
