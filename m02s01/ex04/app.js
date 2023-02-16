@@ -80,7 +80,7 @@ class Car {
 
   disengageBreak() {
     this.lightBack.classList.remove(`light--on`);
-    this.areBreaksOn = true;
+    this.areBreaksOn = false;
     return this;
   }
 
@@ -128,6 +128,7 @@ class Car {
       // stop hazards
       clearInterval(this.intervalId);
       this.areHazardsOn = false;
+      this.disengageBreak();
     } else {
       // v2 for "this"
       this.intervalId = setInterval(() => {
@@ -138,6 +139,7 @@ class Car {
         }
       }, 800);
       this.areHazardsOn = true;
+      this.engageBreak();
     }
 
     return this;
@@ -154,3 +156,5 @@ class Car {
 const car = new Car(0, 250, 'red');
 car.render();
 car.changeRoofColor(`yellow`);
+
+car.toggleHazards();

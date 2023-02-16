@@ -19,17 +19,41 @@ const logMessage = (message = '') => {
 };
 
 let initialWindowWidth = window.innerWidth;
+let initialWindowHeight = window.innerHeight;
 
-logMessage(initialWindowWidth);
+//  logMessage(initialWindowWidth);
+
+function calculateWindowSurface(width = 0, height = 0) {
+  return width * height;
+}
+
+window.addEventListener(`DOMContentLoaded`, () => {
+  let messageload = calculateWindowSurface(
+    initialWindowWidth,
+    initialWindowHeight,
+  );
+  logMessage(`Suprafata la momentul incarcarii: ${messageload}`);
+});
 
 window.addEventListener('resize', () => {
   const newWidth = window.innerWidth;
+  const newHeight = window.innerHeight;
   let message = newWidth;
+  let message2 = newWidth;
+  let message3 = ``;
 
-  if (newWidth !== initialWindowWidth) {
-    message = `Fereastra si-a schimbat dimensiunea: ${newWidth}`;
+  if (newWidth !== initialWindowWidth || newHeight !== initialWindowHeight) {
+    message = `Fereastra si-a schimbat dimensiunea: ${newWidth} x ${newHeight}`;
+    message2 = `Fereastra si-a schimbat dimensiunea orizontala / verticala`;
+    message3 = `Fereastra are acum suprafata de ${calculateWindowSurface(
+      newWidth,
+      newHeight,
+    )} pixeli.`;
     initialWindowWidth = newWidth;
+    initialWindowHeight = newHeight;
   }
 
   logMessage(message);
+  logMessage(message2);
+  logMessage(message3);
 });

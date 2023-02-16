@@ -9,6 +9,7 @@
 
 const stage = document.querySelector('.stage');
 let entriesCounter = 0;
+let sidesCounter = 0;
 
 const log = (message = '', cssClass = 'log') => {
   let paragraph = document.querySelector(`.${cssClass}`);
@@ -22,15 +23,31 @@ const log = (message = '', cssClass = 'log') => {
   paragraph.innerText = message;
 };
 
+// const logsides = (message = '', cssClass = 'logsides') => {
+//   let paragraph = document.querySelector(`.${cssClass}`);
+
+//   if (paragraph === null) {
+//     paragraph = document.createElement('p');
+//     paragraph.classList.add(cssClass);
+//     document.body.append(paragraph);
+//   }
+
+//   paragraph.innerText = message;
+// };
+
 stage.addEventListener('mouseover', () => {
   const message = 'Mousel este pe scena';
   console.log(message);
   log(message);
   log(`Mouseul a fost pe scena de ${++entriesCounter} ori.`, 'entriesCount');
+  // ++sidesCounter;
+  log(`Mouseul a fost pe laturi de ${++sidesCounter} ori.`, 'sidesCount');
 });
 
 stage.addEventListener('mouseout', () => {
   const message = 'Mouseul NU este pe scena';
   console.log(message);
   log(message);
+
+  log(`Mouseul a fost pe laturi de ${++sidesCounter} ori.`, 'sidesCount');
 });
