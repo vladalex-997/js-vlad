@@ -27,13 +27,17 @@ const displayPersons = (persons = []) => {
   document.body.append(ul);
 };
 
-fetch('http://localhost:8080/persons')
-  .then((response) => {
-    return response.json();
-  })
-  .then((persons) => {
-    displayPersons(persons);
-  });
+const getPersons = () => {
+  fetch('http://localhost:8080/persons')
+    .then((response) => {
+      return response.json();
+    })
+    .then((persons) => {
+      displayPersons(persons);
+    });
+};
+
+getPersons();
 
 document.forms[0].addEventListener('submit', (event) => {
   event.preventDefault();
@@ -67,5 +71,9 @@ document.forms[0].addEventListener('submit', (event) => {
     .then((response) => {
       return response.json();
     })
-    .then(() => {});
+    .then(() => {
+      form.reset();
+      document.querySelector('form ~ ul').remove();
+      getPersons();
+    });
 });
